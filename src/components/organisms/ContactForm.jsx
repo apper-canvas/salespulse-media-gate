@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { contactService } from "@/services/api/contactService";
 
 const ContactForm = ({ contact, onSave, onCancel, isOpen }) => {
-  const [formData, setFormData] = useState({
+const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
@@ -16,7 +16,8 @@ const ContactForm = ({ contact, onSave, onCancel, isOpen }) => {
     role: "",
     status: "trial",
     mrr: 0,
-    notes: ""
+    notes: "",
+    name1: ""
   });
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
@@ -25,7 +26,7 @@ const ContactForm = ({ contact, onSave, onCancel, isOpen }) => {
     if (contact) {
       setFormData(contact);
     } else {
-      setFormData({
+setFormData({
         firstName: "",
         lastName: "",
         email: "",
@@ -34,7 +35,8 @@ const ContactForm = ({ contact, onSave, onCancel, isOpen }) => {
         role: "",
         status: "trial",
         mrr: 0,
-        notes: ""
+        notes: "",
+        name1: ""
       });
     }
     setErrors({});
@@ -44,12 +46,13 @@ const ContactForm = ({ contact, onSave, onCancel, isOpen }) => {
     e.preventDefault();
     
     // Validation
-    const newErrors = {};
+const newErrors = {};
     if (!formData.firstName.trim()) newErrors.firstName = "First name is required";
     if (!formData.lastName.trim()) newErrors.lastName = "Last name is required";
     if (!formData.email.trim()) newErrors.email = "Email is required";
     if (!formData.company.trim()) newErrors.company = "Company is required";
     if (!formData.role.trim()) newErrors.role = "Role is required";
+    if (!formData.name1.trim()) newErrors.name1 = "Name1 is required";
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -113,8 +116,21 @@ const ContactForm = ({ contact, onSave, onCancel, isOpen }) => {
                 error={errors.lastName}
                 required
               />
-            </div>
+</div>
 
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Name1 *
+              </label>
+              <Input
+                type="text"
+                value={formData.name1}
+                onChange={(e) => handleChange("name1", e.target.value)}
+                placeholder="Enter name1"
+                error={errors.name1}
+                className="w-full"
+              />
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Input
                 label="Email"

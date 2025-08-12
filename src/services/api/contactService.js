@@ -23,7 +23,8 @@ const mapToDatabase = (contactData) => {
     role_c: contactData.role,
     status_c: contactData.status,
     mrr_c: parseFloat(contactData.mrr) || 0,
-    notes_c: contactData.notes || ""
+    notes_c: contactData.notes || "",
+    name1_c: contactData.name1 || ""
   };
 };
 
@@ -40,6 +41,7 @@ const mapFromDatabase = (dbContact) => {
     status: dbContact.status_c || "trial",
     mrr: dbContact.mrr_c || 0,
     notes: dbContact.notes_c || "",
+    name1: dbContact.name1_c || "",
     createdAt: dbContact.created_at_c || dbContact.CreatedOn
   };
 };
@@ -48,7 +50,7 @@ export const contactService = {
   async getAll() {
     try {
       const apperClient = getApperClient();
-      const params = {
+const params = {
         fields: [
           { field: { Name: "Name" } },
           { field: { Name: "first_name_c" } },
@@ -60,6 +62,7 @@ export const contactService = {
           { field: { Name: "status_c" } },
           { field: { Name: "mrr_c" } },
           { field: { Name: "notes_c" } },
+          { field: { Name: "name1_c" } },
           { field: { Name: "created_at_c" } },
           { field: { Name: "CreatedOn" } }
         ],
@@ -102,7 +105,7 @@ export const contactService = {
     try {
       const apperClient = getApperClient();
       const params = {
-        fields: [
+fields: [
           { field: { Name: "Name" } },
           { field: { Name: "first_name_c" } },
           { field: { Name: "last_name_c" } },
@@ -113,6 +116,7 @@ export const contactService = {
           { field: { Name: "status_c" } },
           { field: { Name: "mrr_c" } },
           { field: { Name: "notes_c" } },
+          { field: { Name: "name1_c" } },
           { field: { Name: "created_at_c" } },
           { field: { Name: "CreatedOn" } }
         ]
