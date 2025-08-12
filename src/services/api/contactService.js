@@ -139,7 +139,7 @@ fields: [
     }
   },
 
-  async create(contactData) {
+async create(contactData) {
     try {
       const apperClient = getApperClient();
       const dbData = mapToDatabase(contactData);
@@ -153,7 +153,7 @@ fields: [
       if (!response.success) {
         console.error(response.message);
         toast.error(response.message);
-        return null;
+        throw new Error(response.message);
       }
 
       if (response.results) {
@@ -169,6 +169,10 @@ fields: [
             });
             if (record.message) toast.error(record.message);
           });
+          
+          if (successfulRecords.length === 0) {
+            throw new Error("Failed to create contact");
+          }
         }
         
         if (successfulRecords.length > 0) {
@@ -176,14 +180,15 @@ fields: [
         }
       }
       
-      return null;
+      throw new Error("No response data received");
     } catch (error) {
       if (error?.response?.data?.message) {
         console.error("Error creating contact:", error?.response?.data?.message);
+        throw new Error(error.response.data.message);
       } else {
-        console.error(error.message);
+        console.error("Error creating contact:", error.message);
+        throw error;
       }
-      return null;
     }
   },
 

@@ -22,11 +22,22 @@ const [formData, setFormData] = useState({
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
-  useEffect(() => {
+useEffect(() => {
     if (contact) {
-      setFormData(contact);
+      setFormData({
+        firstName: contact.firstName || "",
+        lastName: contact.lastName || "",
+        email: contact.email || "",
+        phone: contact.phone || "",
+        company: contact.company || "",
+        role: contact.role || "",
+        status: contact.status || "trial",
+        mrr: contact.mrr || 0,
+        notes: contact.notes || "",
+        name1: contact.name1 || ""
+      });
     } else {
-setFormData({
+      setFormData({
         firstName: "",
         lastName: "",
         email: "",
@@ -42,11 +53,11 @@ setFormData({
     setErrors({});
   }, [contact, isOpen]);
 
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
     
     // Validation
-const newErrors = {};
+    const newErrors = {};
     if (!formData.firstName.trim()) newErrors.firstName = "First name is required";
     if (!formData.lastName.trim()) newErrors.lastName = "Last name is required";
     if (!formData.email.trim()) newErrors.email = "Email is required";
@@ -64,12 +75,17 @@ const newErrors = {};
       let result;
       if (contact) {
         result = await contactService.update(contact.Id, formData);
-        toast.success("Contact updated successfully");
+        if (result) {
+          toast.success("Contact updated successfully");
+          onSave(result);
+        }
       } else {
         result = await contactService.create(formData);
-        toast.success("Contact created successfully");
+        if (result) {
+          toast.success("Contact created successfully");
+          onSave(result);
+        }
       }
-      onSave(result);
     } catch (error) {
       toast.error("Error saving contact");
       console.error("Error saving contact:", error);
