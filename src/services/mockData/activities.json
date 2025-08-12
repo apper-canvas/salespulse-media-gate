@@ -1,0 +1,37 @@
+[
+  {
+    "Id": 1,
+    "type": "email",
+    "description": "Sent proposal to Sarah Johnson at TechCorp Solutions",
+    "timestamp": "2024-03-10T14:30:00Z",
+    "contactId": "1"
+  },
+  {
+    "Id": 2,
+    "type": "call",
+    "description": "Follow-up call with Michael Chen regarding trial feedback",
+    "timestamp": "2024-03-10T11:15:00Z",
+    "contactId": "2"
+  },
+  {
+    "Id": 3,
+    "type": "email",
+    "description": "Thank you email sent to Emily Rodriguez for referral",
+    "timestamp": "2024-03-09T16:45:00Z",
+    "contactId": "3"
+  },
+  {
+    "Id": 4,
+    "type": "call",
+    "description": "Onboarding call scheduled with James Wilson",
+    "timestamp": "2024-03-09T10:20:00Z",
+    "contactId": "6"
+  },
+  {
+    "Id": 5,
+    "type": "email",
+    "description": "Product update newsletter sent to Amanda Foster",
+    "timestamp": "2024-03-08T09:00:00Z",
+    "contactId": "7"
+  }
+]

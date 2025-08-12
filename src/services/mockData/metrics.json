@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Total MRR",
+    "value": 127500,
+    "change": 12.5,
+    "trend": "up"
+  },
+  {
+    "label": "Active Customers",
+    "value": 147,
+    "change": 8.3,
+    "trend": "up"
+  },
+  {
+    "label": "Pipeline Value",
+    "value": 425000,
+    "change": -2.1,
+    "trend": "down"
+  },
+  {
+    "label": "Deals This Month",
+    "value": 23,
+    "change": 15.7,
+    "trend": "up"
+  }
+]
