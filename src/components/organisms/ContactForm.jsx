@@ -17,13 +17,19 @@ const [formData, setFormData] = useState({
     status: "trial",
     mrr: 0,
     notes: "",
-    name1: ""
+    name1: "",
+    jobTitle: "",
+    departmentName: "",
+    departmentId: "",
+    jobSummary: "",
+    parentContactNumber: "",
+    parentAddress: ""
   });
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
 useEffect(() => {
-    if (contact) {
+if (contact) {
       setFormData({
         firstName: contact.firstName || "",
         lastName: contact.lastName || "",
@@ -34,10 +40,16 @@ useEffect(() => {
         status: contact.status || "trial",
         mrr: contact.mrr || 0,
         notes: contact.notes || "",
-        name1: contact.name1 || ""
+        name1: contact.name1 || "",
+        jobTitle: contact.jobTitle || "",
+        departmentName: contact.departmentName || "",
+        departmentId: contact.departmentId || "",
+        jobSummary: contact.jobSummary || "",
+        parentContactNumber: contact.parentContactNumber || "",
+        parentAddress: contact.parentAddress || ""
       });
     } else {
-      setFormData({
+setFormData({
         firstName: "",
         lastName: "",
         email: "",
@@ -47,7 +59,13 @@ useEffect(() => {
         status: "trial",
         mrr: 0,
         notes: "",
-        name1: ""
+        name1: "",
+        jobTitle: "",
+        departmentName: "",
+        departmentId: "",
+        jobSummary: "",
+        parentContactNumber: "",
+        parentAddress: ""
       });
     }
     setErrors({});
@@ -57,14 +75,15 @@ const handleSubmit = async (e) => {
     e.preventDefault();
     
     // Validation
-    const newErrors = {};
+const newErrors = {};
     if (!formData.firstName.trim()) newErrors.firstName = "First name is required";
     if (!formData.lastName.trim()) newErrors.lastName = "Last name is required";
     if (!formData.email.trim()) newErrors.email = "Email is required";
     if (!formData.company.trim()) newErrors.company = "Company is required";
     if (!formData.role.trim()) newErrors.role = "Role is required";
     if (!formData.name1.trim()) newErrors.name1 = "Name1 is required";
-
+    if (!formData.jobTitle.trim()) newErrors.jobTitle = "Job title is required";
+    if (!formData.departmentName.trim()) newErrors.departmentName = "Department name is required";
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
@@ -181,7 +200,93 @@ const handleSubmit = async (e) => {
                 required
               />
             </div>
+{/* Job Title */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Job Title *
+              </label>
+              <Input
+                type="text"
+                value={formData.jobTitle}
+                onChange={(e) => handleChange("jobTitle", e.target.value)}
+                placeholder="Enter job title"
+                error={errors.jobTitle}
+              />
+              {errors.jobTitle && (
+                <p className="mt-1 text-sm text-red-600">{errors.jobTitle}</p>
+              )}
+            </div>
 
+            {/* Department Information */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Department Name *
+                </label>
+                <Input
+                  type="text"
+                  value={formData.departmentName}
+                  onChange={(e) => handleChange("departmentName", e.target.value)}
+                  placeholder="Enter department name"
+                  error={errors.departmentName}
+                />
+                {errors.departmentName && (
+                  <p className="mt-1 text-sm text-red-600">{errors.departmentName}</p>
+                )}
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Department ID
+                </label>
+                <Input
+                  type="number"
+                  value={formData.departmentId}
+                  onChange={(e) => handleChange("departmentId", e.target.value)}
+                  placeholder="Enter department ID"
+                />
+              </div>
+            </div>
+
+            {/* Job Summary */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Job Summary
+              </label>
+              <textarea
+                value={formData.jobSummary}
+                onChange={(e) => handleChange("jobSummary", e.target.value)}
+                placeholder="Enter job summary and key responsibilities"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
+                rows={3}
+              />
+            </div>
+
+            {/* Parent Contact Information */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Parent Contact Number
+                </label>
+                <Input
+                  type="tel"
+                  value={formData.parentContactNumber}
+                  onChange={(e) => handleChange("parentContactNumber", e.target.value)}
+                  placeholder="Enter parent contact number"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Parent Address
+                </label>
+                <textarea
+                  value={formData.parentAddress}
+                  onChange={(e) => handleChange("parentAddress", e.target.value)}
+                  placeholder="Enter parent contact address"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
+                  rows={2}
+                />
+              </div>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700">

@@ -10,7 +10,13 @@
     "status": "active",
     "mrr": 2500,
     "createdAt": "2024-01-15T10:30:00Z",
-    "notes": "Key decision maker for enterprise deals. Prefers email communication and detailed proposals."
+    "notes": "Key decision maker for enterprise deals. Prefers email communication and detailed proposals.",
+    "jobTitle": "Vice President of Sales",
+    "departmentName": "Sales & Marketing",
+    "departmentId": "101",
+    "jobSummary": "Oversees all sales operations and leads the enterprise sales team. Responsible for strategic partnerships and key client relationships.",
+    "parentContactNumber": "+1 (555) 123-4500",
+    "parentAddress": "123 Corporate Drive, Suite 500, Tech City, CA 94105"
   },
   {
     "Id": 2,
@@ -23,7 +29,13 @@
     "status": "trial",
     "mrr": 850,
     "createdAt": "2024-02-08T14:20:00Z",
-    "notes": "Very technical, needs detailed integration documentation. Trial expires end of month."
+    "notes": "Very technical, needs detailed integration documentation. Trial expires end of month.",
+    "jobTitle": "Chief Technology Officer",
+    "departmentName": "Engineering",
+    "departmentId": "201",
+    "jobSummary": "Leads technology strategy and product development. Focuses on scalable architecture and technical innovation.",
+    "parentContactNumber": "+1 (555) 234-5600",
+    "parentAddress": "456 Innovation Blvd, Floor 12, San Francisco, CA 94107"
   },
   {
     "Id": 3,
@@ -36,7 +48,13 @@
     "status": "active",
     "mrr": 1200,
     "createdAt": "2024-01-22T09:15:00Z",
-    "notes": "Great advocate for our platform. Has referred 3 new prospects this quarter."
+    "notes": "Great advocate for our platform. Has referred 3 new prospects this quarter.",
+    "jobTitle": "Senior Marketing Director",
+    "departmentName": "Marketing & Communications",
+    "departmentId": "301",
+    "jobSummary": "Develops comprehensive marketing strategies and oversees brand positioning. Manages digital marketing campaigns and customer acquisition.",
+    "parentContactNumber": "+1 (555) 345-6700",
+    "parentAddress": "789 Global Plaza, Tower A, New York, NY 10001"
   },
   {
     "Id": 4,
@@ -49,7 +67,13 @@
     "status": "churned",
     "mrr": 0,
     "createdAt": "2023-11-10T16:45:00Z",
-    "notes": "Churned due to budget constraints. Keep warm for future opportunities when they scale."
+    "notes": "Churned due to budget constraints. Keep warm for future opportunities when they scale.",
+    "jobTitle": "Founder & Chief Executive Officer",
+    "departmentName": "Executive Leadership",
+    "departmentId": "001",
+    "jobSummary": "Founded the company and leads overall strategic direction. Focuses on product vision, fundraising, and building company culture.",
+    "parentContactNumber": "+1 (555) 456-7800",
+    "parentAddress": "101 Startup Way, Incubator Hub, Austin, TX 78701"
   },
   {
     "Id": 5,
@@ -62,7 +86,13 @@
     "status": "active",
     "mrr": 3200,
     "createdAt": "2023-12-05T11:30:00Z",
-    "notes": "Manages a large team. Interested in advanced reporting features for team performance tracking."
+    "notes": "Manages a large team. Interested in advanced reporting features for team performance tracking.",
+    "jobTitle": "Senior Operations Manager",
+    "departmentName": "Operations & Process Management",
+    "departmentId": "401",
+    "jobSummary": "Optimizes operational processes and manages cross-functional teams. Implements efficiency improvements and performance tracking systems.",
+    "parentContactNumber": "+1 (555) 567-8900",
+    "parentAddress": "360 Enterprise Circle, Building B, Chicago, IL 60601"
   },
   {
     "Id": 6,
@@ -75,7 +105,13 @@
     "status": "trial",
     "mrr": 950,
     "createdAt": "2024-02-20T13:10:00Z",
-    "notes": "Evaluating multiple solutions. Price sensitive but sees the value in our automation features."
+    "notes": "Evaluating multiple solutions. Price sensitive but sees the value in our automation features.",
+    "jobTitle": "Head of Growth & Analytics",
+    "departmentName": "Growth & Data Science",
+    "departmentId": "501",
+    "jobSummary": "Drives user acquisition and retention strategies. Analyzes growth metrics and implements data-driven optimization initiatives.",
+    "parentContactNumber": "+1 (555) 678-9000",
+    "parentAddress": "555 Scale Street, Tech Park, Seattle, WA 98101"
   },
   {
     "Id": 7,
@@ -88,7 +124,13 @@
     "status": "active",
     "mrr": 1800,
     "createdAt": "2024-01-08T08:25:00Z",
-    "notes": "Very engaged user. Provides excellent feedback on new features. Potential beta tester."
+    "notes": "Very engaged user. Provides excellent feedback on new features. Potential beta tester.",
+    "jobTitle": "Senior Product Manager",
+    "departmentName": "Product Development",
+    "departmentId": "601",
+    "jobSummary": "Defines product roadmap and manages feature development lifecycle. Collaborates with engineering and design teams to deliver user-centric solutions.",
+    "parentContactNumber": "+1 (555) 789-0100",
+    "parentAddress": "777 Digital Avenue, Innovation Center, Boston, MA 02101"
   },
   {
     "Id": 8,
@@ -101,6 +143,12 @@
     "status": "trial",
     "mrr": 750,
     "createdAt": "2024-02-28T15:40:00Z",
-    "notes": "Recently started trial. Needs onboarding call to maximize platform usage."
+    "notes": "Recently started trial. Needs onboarding call to maximize platform usage.",
+    "jobTitle": "Regional Sales Director",
+    "departmentName": "Sales & Business Development",
+    "departmentId": "701",
+    "jobSummary": "Manages regional sales team and develops new business opportunities. Focuses on client relationships and revenue growth strategies.",
+    "parentContactNumber": "+1 (555) 890-1200",
+    "parentAddress": "888 Future Lane, Business District, Miami, FL 33101"
   }
 ]

@@ -44,9 +44,12 @@ const ContactCard = ({ contact, onEdit, onDelete, onClick }) => {
             </Badge>
           </div>
           <div className="space-y-1">
-            <div className="flex items-center text-sm text-gray-600">
+<div className="flex items-center text-sm text-gray-600">
               <ApperIcon name="Building2" size={14} className="mr-2" />
-              <span>{contact.company} • {contact.role}</span>
+              <span>
+                {contact.jobTitle && `${contact.jobTitle} • `}
+                {contact.company} • {contact.role}
+              </span>
             </div>
             <div className="flex items-center text-sm text-gray-600">
               <ApperIcon name="Mail" size={14} className="mr-2" />

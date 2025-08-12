@@ -24,7 +24,13 @@ const mapToDatabase = (contactData) => {
     status_c: contactData.status,
     mrr_c: parseFloat(contactData.mrr) || 0,
     notes_c: contactData.notes || "",
-    name1_c: contactData.name1 || ""
+    name1_c: contactData.name1 || "",
+    job_title_c: contactData.jobTitle || "",
+    department_name_c: contactData.departmentName || "",
+    department_id_c: contactData.departmentId ? parseInt(contactData.departmentId) : null,
+    job_summary_c: contactData.jobSummary || "",
+    parent_contact_number_c: contactData.parentContactNumber || "",
+    parent_address_c: contactData.parentAddress || ""
   };
 };
 
@@ -42,6 +48,12 @@ const mapFromDatabase = (dbContact) => {
     mrr: dbContact.mrr_c || 0,
     notes: dbContact.notes_c || "",
     name1: dbContact.name1_c || "",
+    jobTitle: dbContact.job_title_c || "",
+    departmentName: dbContact.department_name_c || "",
+    departmentId: dbContact.department_id_c || "",
+    jobSummary: dbContact.job_summary_c || "",
+    parentContactNumber: dbContact.parent_contact_number_c || "",
+    parentAddress: dbContact.parent_address_c || "",
     createdAt: dbContact.created_at_c || dbContact.CreatedOn
   };
 };
@@ -63,6 +75,12 @@ const params = {
           { field: { Name: "mrr_c" } },
           { field: { Name: "notes_c" } },
           { field: { Name: "name1_c" } },
+          { field: { Name: "job_title_c" } },
+          { field: { Name: "department_name_c" } },
+          { field: { Name: "department_id_c" } },
+          { field: { Name: "job_summary_c" } },
+          { field: { Name: "parent_contact_number_c" } },
+          { field: { Name: "parent_address_c" } },
           { field: { Name: "created_at_c" } },
           { field: { Name: "CreatedOn" } }
         ],
@@ -117,6 +135,12 @@ fields: [
           { field: { Name: "mrr_c" } },
           { field: { Name: "notes_c" } },
           { field: { Name: "name1_c" } },
+          { field: { Name: "job_title_c" } },
+          { field: { Name: "department_name_c" } },
+          { field: { Name: "department_id_c" } },
+          { field: { Name: "job_summary_c" } },
+          { field: { Name: "parent_contact_number_c" } },
+          { field: { Name: "parent_address_c" } },
           { field: { Name: "created_at_c" } },
           { field: { Name: "CreatedOn" } }
         ]

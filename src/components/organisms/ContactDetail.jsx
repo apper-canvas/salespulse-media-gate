@@ -46,7 +46,7 @@ const ContactDetail = ({ contact, onEdit, onClose, isOpen }) => {
                 </Badge>
               </div>
               <p className="text-lg text-gray-600">
-                {contact.role} at {contact.company}
+{contact.jobTitle && `${contact.jobTitle} • `}{contact.role} at {contact.company}
               </p>
             </div>
             <div className="flex items-center space-x-2">
@@ -84,8 +84,8 @@ const ContactDetail = ({ contact, onEdit, onClose, isOpen }) => {
               </div>
             </Card>
 
-            <Card className="p-4">
-              <h3 className="text-sm font-medium text-gray-500 mb-3">Business Information</h3>
+<Card className="p-4">
+              <h3 className="text-sm font-medium text-gray-500 mb-3">Professional Information</h3>
               <div className="space-y-3">
                 <div className="flex items-center space-x-3">
                   <ApperIcon name="Building2" size={18} className="text-gray-400" />
@@ -101,6 +101,27 @@ const ContactDetail = ({ contact, onEdit, onClose, isOpen }) => {
                     <p className="text-sm font-medium text-gray-900">{contact.role}</p>
                   </div>
                 </div>
+                {contact.jobTitle && (
+                  <div className="flex items-center space-x-3">
+                    <ApperIcon name="User" size={18} className="text-gray-400" />
+                    <div>
+                      <p className="text-sm text-gray-600">Job Title</p>
+                      <p className="text-sm font-medium text-gray-900">{contact.jobTitle}</p>
+                    </div>
+                  </div>
+                )}
+                {contact.departmentName && (
+                  <div className="flex items-center space-x-3">
+                    <ApperIcon name="Users" size={18} className="text-gray-400" />
+                    <div>
+                      <p className="text-sm text-gray-600">Department</p>
+                      <p className="text-sm font-medium text-gray-900">
+                        {contact.departmentName}
+                        {contact.departmentId && ` (ID: ${contact.departmentId})`}
+                      </p>
+                    </div>
+                  </div>
+                )}
                 <div className="flex items-center space-x-3">
                   <ApperIcon name="DollarSign" size={18} className="text-gray-400" />
                   <div>
@@ -110,6 +131,41 @@ const ContactDetail = ({ contact, onEdit, onClose, isOpen }) => {
                 </div>
               </div>
             </Card>
+
+            {/* Job Summary */}
+            {contact.jobSummary && (
+              <Card className="p-4">
+                <h3 className="text-sm font-medium text-gray-500 mb-3">Job Summary</h3>
+                <p className="text-sm text-gray-900 leading-relaxed">{contact.jobSummary}</p>
+              </Card>
+            )}
+
+            {/* Parent Contact Information */}
+            {(contact.parentContactNumber || contact.parentAddress) && (
+              <Card className="p-4">
+                <h3 className="text-sm font-medium text-gray-500 mb-3">Parent Contact Information</h3>
+                <div className="space-y-3">
+                  {contact.parentContactNumber && (
+                    <div className="flex items-center space-x-3">
+                      <ApperIcon name="Phone" size={18} className="text-gray-400" />
+                      <div>
+                        <p className="text-sm text-gray-600">Parent Contact Number</p>
+                        <p className="text-sm font-medium text-gray-900">{contact.parentContactNumber}</p>
+                      </div>
+                    </div>
+                  )}
+                  {contact.parentAddress && (
+                    <div className="flex items-center space-x-3">
+                      <ApperIcon name="MapPin" size={18} className="text-gray-400" />
+                      <div>
+                        <p className="text-sm text-gray-600">Parent Address</p>
+                        <p className="text-sm font-medium text-gray-900">{contact.parentAddress}</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </Card>
+            )}
           </div>
 
           {/* Notes */}
