@@ -8,6 +8,7 @@ import Dashboard from "@/components/pages/Dashboard";
 import Contacts from "@/components/pages/Contacts";
 import Companies from "@/components/pages/Companies";
 import Activities from "@/components/pages/Activities";
+import Reports from "@/components/pages/Reports";
 import ComingSoon from "@/components/pages/ComingSoon";
 import Login from '@/components/pages/Login';
 import Signup from '@/components/pages/Signup';
@@ -15,7 +16,6 @@ import Callback from '@/components/pages/Callback';
 import ErrorPage from '@/components/pages/ErrorPage';
 import ResetPassword from '@/components/pages/ResetPassword';
 import PromptPassword from '@/components/pages/PromptPassword';
-
 // Create auth context
 export const AuthContext = createContext(null);
 
@@ -132,7 +132,7 @@ function App() {
                 <Route path="/companies" element={<Companies />} />
                 <Route path="/pipeline" element={<ComingSoon section="Pipeline" />} />
                 <Route path="/activities" element={<Activities />} />
-                <Route path="/reports" element={<ComingSoon section="Reports" />} />
+<Route path="/reports" element={<Reports />} />
               </Routes>
             </Layout>
             
