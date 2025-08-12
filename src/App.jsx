@@ -4,18 +4,18 @@ import { ToastContainer } from "react-toastify";
 import Layout from "@/components/organisms/Layout";
 import Dashboard from "@/components/pages/Dashboard";
 import Contacts from "@/components/pages/Contacts";
+import Companies from "@/components/pages/Companies";
 import ComingSoon from "@/components/pages/ComingSoon";
-
 function App() {
   return (
     <Router>
       <div className="App">
         <Layout>
-          <Routes>
+<Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/contacts" element={<Contacts />} />
-            <Route path="/companies" element={<ComingSoon section="Companies" />} />
+            <Route path="/companies" element={<Companies />} />
             <Route path="/pipeline" element={<ComingSoon section="Pipeline" />} />
             <Route path="/activities" element={<ComingSoon section="Activities" />} />
             <Route path="/reports" element={<ComingSoon section="Reports" />} />

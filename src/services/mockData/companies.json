@@ -1,0 +1,90 @@
+[
+  {
+    "Id": 1,
+    "name": "TechFlow Solutions",
+    "industry": "Technology",
+    "employees": 250,
+    "website": "https://techflowsolutions.com",
+    "subscriptionPlan": "Enterprise",
+    "status": "active",
+    "mrr": 4500,
+    "createdAt": "2024-01-15T08:30:00Z"
+  },
+  {
+    "Id": 2,
+    "name": "Healthcare Innovations",
+    "industry": "Healthcare",
+    "employees": 120,
+    "website": "https://healthcareinnovations.com",
+    "subscriptionPlan": "Professional",
+    "status": "active",
+    "mrr": 2800,
+    "createdAt": "2024-02-03T14:20:00Z"
+  },
+  {
+    "Id": 3,
+    "name": "Green Energy Corp",
+    "industry": "Energy",
+    "employees": 85,
+    "website": "https://greenenergycorp.com",
+    "subscriptionPlan": "Professional",
+    "status": "trial",
+    "mrr": 1200,
+    "createdAt": "2024-02-20T11:15:00Z"
+  },
+  {
+    "Id": 4,
+    "name": "EduTech Academy",
+    "industry": "Education",
+    "employees": 45,
+    "website": "https://edutechacademy.com",
+    "subscriptionPlan": "Starter",
+    "status": "active",
+    "mrr": 890,
+    "createdAt": "2024-01-28T16:45:00Z"
+  },
+  {
+    "Id": 5,
+    "name": "Financial Advisors Plus",
+    "industry": "Finance",
+    "employees": 180,
+    "website": "https://financialadvisorsplus.com",
+    "subscriptionPlan": "Enterprise",
+    "status": "active",
+    "mrr": 3200,
+    "createdAt": "2024-01-10T09:00:00Z"
+  },
+  {
+    "Id": 6,
+    "name": "Retail Masters",
+    "industry": "Retail",
+    "employees": 320,
+    "website": "https://retailmasters.com",
+    "subscriptionPlan": "Professional",
+    "status": "churned",
+    "mrr": 0,
+    "createdAt": "2023-11-22T13:30:00Z"
+  },
+  {
+    "Id": 7,
+    "name": "Manufacturing Pro",
+    "industry": "Manufacturing",
+    "employees": 500,
+    "website": "https://manufacturingpro.com",
+    "subscriptionPlan": "Enterprise",
+    "status": "active",
+    "mrr": 5200,
+    "createdAt": "2024-01-05T10:20:00Z"
+  },
+  {
+    "Id": 8,
+    "name": "Consulting Experts",
+    "industry": "Consulting",
+    "employees": 75,
+    "website": "https://consultingexperts.com",
+    "subscriptionPlan": "Professional",
+    "status": "trial",
+    "mrr": 1500,
+    "createdAt": "2024-03-01T12:00:00Z"
+  }
+]
