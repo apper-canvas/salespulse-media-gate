@@ -1,8 +1,8 @@
 import React from "react";
+import { toast } from "react-toastify";
 import ApperIcon from "@/components/ApperIcon";
 import Card from "@/components/atoms/Card";
 import Button from "@/components/atoms/Button";
-
 const ComingSoon = ({ section }) => {
   const getIconForSection = (sectionName) => {
     switch (sectionName) {
@@ -68,9 +68,25 @@ const ComingSoon = ({ section }) => {
         return ["Feature planning in progress"];
     }
   };
+const handleCreatePipeline = () => {
+    toast.success(`${section} creation request has been registered! We'll notify you when this feature is available.`);
+  };
 
   return (
     <div className="max-w-4xl mx-auto">
+      {section === "Pipeline" && (
+        <div className="mb-8">
+          <Button 
+            onClick={handleCreatePipeline}
+            variant="primary"
+            className="w-full sm:w-auto flex items-center justify-center"
+          >
+            <ApperIcon name="Plus" size={16} className="mr-2" />
+            Create Pipeline
+          </Button>
+        </div>
+      )}
+      
       <div className="text-center mb-8">
         <div className="h-20 w-20 bg-gradient-to-br from-primary/20 to-primary-light/20 rounded-full flex items-center justify-center mx-auto mb-6">
           <ApperIcon name={getIconForSection(section)} size={40} className="text-primary" />
@@ -82,7 +98,6 @@ const ComingSoon = ({ section }) => {
           {getDescriptionForSection(section)}
         </p>
       </div>
-
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
         <Card className="p-8">
           <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
