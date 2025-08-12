@@ -1,65 +1,277 @@
-import contactsData from "@/services/mockData/contacts.json";
+import { toast } from 'react-toastify';
 
-// In-memory storage for runtime modifications
-let contacts = [...contactsData];
+// Initialize ApperClient with Project ID and Public Key
+const getApperClient = () => {
+  const { ApperClient } = window.ApperSDK;
+  return new ApperClient({
+    apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+    apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+  });
+};
 
-const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+const TABLE_NAME = 'contact_c';
+
+// Field mapping from UI to database
+const mapToDatabase = (contactData) => {
+  return {
+    Name: `${contactData.firstName} ${contactData.lastName}`,
+    first_name_c: contactData.firstName,
+    last_name_c: contactData.lastName,
+    email_c: contactData.email,
+    phone_c: contactData.phone || "",
+    company_c: contactData.company,
+    role_c: contactData.role,
+    status_c: contactData.status,
+    mrr_c: parseFloat(contactData.mrr) || 0,
+    notes_c: contactData.notes || ""
+  };
+};
+
+// Field mapping from database to UI
+const mapFromDatabase = (dbContact) => {
+  return {
+    Id: dbContact.Id,
+    firstName: dbContact.first_name_c || "",
+    lastName: dbContact.last_name_c || "",
+    email: dbContact.email_c || "",
+    phone: dbContact.phone_c || "",
+    company: dbContact.company_c || "",
+    role: dbContact.role_c || "",
+    status: dbContact.status_c || "trial",
+    mrr: dbContact.mrr_c || 0,
+    notes: dbContact.notes_c || "",
+    createdAt: dbContact.created_at_c || dbContact.CreatedOn
+  };
+};
 
 export const contactService = {
   async getAll() {
-    await delay(300);
-    return [...contacts];
+    try {
+      const apperClient = getApperClient();
+      const params = {
+        fields: [
+          { field: { Name: "Name" } },
+          { field: { Name: "first_name_c" } },
+          { field: { Name: "last_name_c" } },
+          { field: { Name: "email_c" } },
+          { field: { Name: "phone_c" } },
+          { field: { Name: "company_c" } },
+          { field: { Name: "role_c" } },
+          { field: { Name: "status_c" } },
+          { field: { Name: "mrr_c" } },
+          { field: { Name: "notes_c" } },
+          { field: { Name: "created_at_c" } },
+          { field: { Name: "CreatedOn" } }
+        ],
+        orderBy: [
+          {
+            fieldName: "CreatedOn",
+            sorttype: "DESC"
+          }
+        ],
+        pagingInfo: {
+          limit: 100,
+          offset: 0
+        }
+      };
+
+      const response = await apperClient.fetchRecords(TABLE_NAME, params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        toast.error(response.message);
+        return [];
+      }
+
+      if (!response.data || response.data.length === 0) {
+        return [];
+      }
+
+      return response.data.map(mapFromDatabase);
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error fetching contacts:", error?.response?.data?.message);
+      } else {
+        console.error(error.message);
+      }
+      return [];
+    }
   },
 
   async getById(id) {
-    await delay(200);
-    const contact = contacts.find(c => c.Id === parseInt(id));
-    if (!contact) {
-      throw new Error(`Contact with ID ${id} not found`);
+    try {
+      const apperClient = getApperClient();
+      const params = {
+        fields: [
+          { field: { Name: "Name" } },
+          { field: { Name: "first_name_c" } },
+          { field: { Name: "last_name_c" } },
+          { field: { Name: "email_c" } },
+          { field: { Name: "phone_c" } },
+          { field: { Name: "company_c" } },
+          { field: { Name: "role_c" } },
+          { field: { Name: "status_c" } },
+          { field: { Name: "mrr_c" } },
+          { field: { Name: "notes_c" } },
+          { field: { Name: "created_at_c" } },
+          { field: { Name: "CreatedOn" } }
+        ]
+      };
+
+      const response = await apperClient.getRecordById(TABLE_NAME, id, params);
+      
+      if (!response || !response.data) {
+        return null;
+      }
+
+      return mapFromDatabase(response.data);
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error(`Error fetching contact with ID ${id}:`, error?.response?.data?.message);
+      } else {
+        console.error(error.message);
+      }
+      return null;
     }
-    return { ...contact };
   },
 
   async create(contactData) {
-    await delay(400);
-    const newId = Math.max(...contacts.map(c => c.Id)) + 1;
-    const newContact = {
-      ...contactData,
-      Id: newId,
-      createdAt: new Date().toISOString(),
-      mrr: parseInt(contactData.mrr) || 0
-    };
-    contacts.unshift(newContact);
-    return { ...newContact };
+    try {
+      const apperClient = getApperClient();
+      const dbData = mapToDatabase(contactData);
+      
+      const params = {
+        records: [dbData]
+      };
+
+      const response = await apperClient.createRecord(TABLE_NAME, params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        toast.error(response.message);
+        return null;
+      }
+
+      if (response.results) {
+        const successfulRecords = response.results.filter(result => result.success);
+        const failedRecords = response.results.filter(result => !result.success);
+        
+        if (failedRecords.length > 0) {
+          console.error(`Failed to create contact ${failedRecords.length} records:${JSON.stringify(failedRecords)}`);
+          
+          failedRecords.forEach(record => {
+            record.errors?.forEach(error => {
+              toast.error(`${error.fieldLabel}: ${error.message}`);
+            });
+            if (record.message) toast.error(record.message);
+          });
+        }
+        
+        if (successfulRecords.length > 0) {
+          return mapFromDatabase(successfulRecords[0].data);
+        }
+      }
+      
+      return null;
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error creating contact:", error?.response?.data?.message);
+      } else {
+        console.error(error.message);
+      }
+      return null;
+    }
   },
 
   async update(id, contactData) {
-    await delay(400);
-    const index = contacts.findIndex(c => c.Id === parseInt(id));
-    if (index === -1) {
-      throw new Error(`Contact with ID ${id} not found`);
+    try {
+      const apperClient = getApperClient();
+      const dbData = mapToDatabase(contactData);
+      
+      const params = {
+        records: [{
+          Id: parseInt(id),
+          ...dbData
+        }]
+      };
+
+      const response = await apperClient.updateRecord(TABLE_NAME, params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        toast.error(response.message);
+        return null;
+      }
+
+      if (response.results) {
+        const successfulUpdates = response.results.filter(result => result.success);
+        const failedUpdates = response.results.filter(result => !result.success);
+        
+        if (failedUpdates.length > 0) {
+          console.error(`Failed to update contact ${failedUpdates.length} records:${JSON.stringify(failedUpdates)}`);
+          
+          failedUpdates.forEach(record => {
+            record.errors?.forEach(error => {
+              toast.error(`${error.fieldLabel}: ${error.message}`);
+            });
+            if (record.message) toast.error(record.message);
+          });
+        }
+        
+        if (successfulUpdates.length > 0) {
+          return mapFromDatabase(successfulUpdates[0].data);
+        }
+      }
+      
+      return null;
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error updating contact:", error?.response?.data?.message);
+      } else {
+        console.error(error.message);
+      }
+      return null;
     }
-    
-    const updatedContact = {
-      ...contacts[index],
-      ...contactData,
-      Id: parseInt(id),
-      mrr: parseInt(contactData.mrr) || 0
-    };
-    
-    contacts[index] = updatedContact;
-    return { ...updatedContact };
   },
 
   async delete(id) {
-    await delay(300);
-    const index = contacts.findIndex(c => c.Id === parseInt(id));
-    if (index === -1) {
-      throw new Error(`Contact with ID ${id} not found`);
+    try {
+      const apperClient = getApperClient();
+      const params = {
+        RecordIds: [parseInt(id)]
+      };
+
+      const response = await apperClient.deleteRecord(TABLE_NAME, params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        toast.error(response.message);
+        return false;
+      }
+
+      if (response.results) {
+        const successfulDeletions = response.results.filter(result => result.success);
+        const failedDeletions = response.results.filter(result => !result.success);
+        
+        if (failedDeletions.length > 0) {
+          console.error(`Failed to delete contact ${failedDeletions.length} records:${JSON.stringify(failedDeletions)}`);
+          
+          failedDeletions.forEach(record => {
+            if (record.message) toast.error(record.message);
+          });
+        }
+        
+        return successfulDeletions.length > 0;
+      }
+      
+      return true;
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error deleting contact:", error?.response?.data?.message);
+      } else {
+        console.error(error.message);
+      }
+      return false;
     }
-    
-    const deletedContact = contacts[index];
-    contacts.splice(index, 1);
-    return { ...deletedContact };
   }
 };
